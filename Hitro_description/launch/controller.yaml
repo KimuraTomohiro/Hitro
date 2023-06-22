@@ -1,0 +1,59 @@
+Hitro_controller:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+
+  # Position Controllers --------------------------------------
+  br_flipper_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: br_flipper
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  fr_flipper_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: fr_flipper
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  bl_flipper_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: bl_flipper
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  fl_flipper_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: fl_flipper
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  square2base_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: square2base
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  base21link_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: base21link
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  1link22link_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: 1link22link
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  2link2hand_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: 2link2hand
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  handyaw_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: handyaw
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  handroll_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: handroll
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  top_right_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: top_right
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  top_left_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: top_left
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  cam_angle_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: cam_angle
+    pid: {p: 100.0, i: 0.01, d: 10.0}

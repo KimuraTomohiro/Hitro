@@ -1,0 +1,473 @@
+<?xml version="1.0" ?>
+<robot name="Hitro" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find Hitro_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find Hitro_description)/urdf/Hitro.trans" />
+<xacro:include filename="$(find Hitro_description)/urdf/Hitro.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.0023455727002161934 0.00047091776694981947 0.13107186560438153" rpy="0 0 0"/>
+    <mass value="11.789533003371805"/>
+    <inertia ixx="0.107649" iyy="0.183929" izz="0.214336" ixy="0.0" iyz="-2e-06" ixz="-3.3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="br_flipper_1">
+  <inertial>
+    <origin xyz="-6.928644614213886e-05 -0.026691787947826423 0.09533601614626816" rpy="0 0 0"/>
+    <mass value="0.8856424819003467"/>
+    <inertia ixx="0.008874" iyy="0.009821" izz="0.001203" ixy="-0.0" iyz="0.000109" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.098623 0.136529 -0.03399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/br_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.098623 0.136529 -0.03399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/br_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fr_flipper_1">
+  <inertial>
+    <origin xyz="-6.929773204097933e-05 -0.026691787947827006 0.09533554023830318" rpy="0 0 0"/>
+    <mass value="0.8856424819003467"/>
+    <inertia ixx="0.008874" iyy="0.009821" izz="0.001203" ixy="-0.0" iyz="0.000109" ixz="5e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.103377 0.136529 -0.034058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/fr_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.103377 0.136529 -0.034058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/fr_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bl_flipper_1">
+  <inertial>
+    <origin xyz="7.444846053443477e-05 0.026691503568869235 0.09531430480252065" rpy="0 0 0"/>
+    <mass value="0.8856424819003468"/>
+    <inertia ixx="0.008874" iyy="0.00982" izz="0.001203" ixy="-0.0" iyz="-0.000109" ixz="-7e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.098623 -0.137471 -0.03399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/bl_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.098623 -0.137471 -0.03399" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/bl_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="fl_flipper_1">
+  <inertial>
+    <origin xyz="7.44371746355943e-05 0.026691503568868236 0.09531382889455595" rpy="0 0 0"/>
+    <mass value="0.8856424819003468"/>
+    <inertia ixx="0.008874" iyy="0.00982" izz="0.001203" ixy="-0.0" iyz="-0.000109" ixz="-7e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.103377 -0.137471 -0.034058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/fl_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.103377 -0.137471 -0.034058" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/fl_flipper_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="arm_base_1">
+  <inertial>
+    <origin xyz="-0.10046989920058008 -0.12176485106858234 0.015451232617987226" rpy="0 0 0"/>
+    <mass value="0.17911052684474799"/>
+    <inertia ixx="0.000456" iyy="0.000249" izz="0.000612" ixy="-3.9e-05" iyz="6.3e-05" ixz="9e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.19232 -0.096071 -0.206587" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/arm_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.19232 -0.096071 -0.206587" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/arm_base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_1">
+  <inertial>
+    <origin xyz="-0.0007250558274127239 -0.021534981191169467 0.08573353340348588" rpy="0 0 0"/>
+    <mass value="0.6998440147844079"/>
+    <inertia ixx="0.002536" iyy="0.002453" izz="0.001958" ixy="-2e-06" iyz="0.000558" ixz="6e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.099143 -0.039875 -0.212418" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.099143 -0.039875 -0.212418" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/base_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="1link_1">
+  <inertial>
+    <origin xyz="-0.0008629496221968513 -0.030055296256889887 0.22619297982587672" rpy="0 0 0"/>
+    <mass value="0.3811376975336681"/>
+    <inertia ixx="0.011662" iyy="0.011561" izz="0.000238" ixy="0.0" iyz="-0.000667" ixz="2.9e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.098518 -0.069775 -0.366417" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/1link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.098518 -0.069775 -0.366417" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/1link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="2link_1">
+  <inertial>
+    <origin xyz="0.20635170196698394 0.038602780502008785 0.0005720601403558234" rpy="0 0 0"/>
+    <mass value="0.33819821732309985"/>
+    <inertia ixx="0.000175" iyy="0.01074" izz="0.010807" ixy="-0.000219" iyz="-0.0" ixz="-3e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.097111 -0.066777 -0.700647" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/2link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.097111 -0.066777 -0.700647" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/2link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="2link2hand_1">
+  <inertial>
+    <origin xyz="0.05199602533351011 0.02422993039667011 0.000565366789860744" rpy="0 0 0"/>
+    <mass value="0.051855108142407236"/>
+    <inertia ixx="1.1e-05" iyy="2e-05" izz="2e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.51347 -0.082615 -0.702033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/2link2hand_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.51347 -0.082615 -0.702033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/2link2hand_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hand_yaw_1">
+  <inertial>
+    <origin xyz="0.017851837186656172 0.00016947250181670315 -0.018829472095383215" rpy="0 0 0"/>
+    <mass value="0.0024620558650562713"/>
+    <inertia ixx="1e-06" iyy="1e-06" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.580748 -0.106765 -0.723346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/hand_yaw_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.580748 -0.106765 -0.723346" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/hand_yaw_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="hand_roll_1">
+  <inertial>
+    <origin xyz="0.03926282562947525 -0.0006343667919676416 0.0280672054007276" rpy="0 0 0"/>
+    <mass value="0.2013221293930582"/>
+    <inertia ixx="0.00039" iyy="0.000284" izz="0.00023" ixy="1.9e-05" iyz="-5.9e-05" ixz="4.1e-05"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.608587 -0.106971 -0.704531" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.608587 -0.106971 -0.704531" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/hand_roll_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="top_right_1">
+  <inertial>
+    <origin xyz="0.06140861742337256 -0.003150372581042657 -0.023301799927673117" rpy="0 0 0"/>
+    <mass value="0.057735310776424194"/>
+    <inertia ixx="2.9e-05" iyy="8.1e-05" izz="6.1e-05" ixy="-7e-06" iyz="-1e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.667521 -0.094865 -0.728561" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/top_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.667521 -0.094865 -0.728561" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/top_right_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="top_left_1">
+  <inertial>
+    <origin xyz="0.0612388368041108 0.001928996052491333 -0.023205210120308517" rpy="0 0 0"/>
+    <mass value="0.057732876202703155"/>
+    <inertia ixx="2.8e-05" iyy="8.1e-05" izz="6.1e-05" ixy="5e-06" iyz="-1e-06" ixz="-1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.667422 -0.122865 -0.727649" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/top_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.667422 -0.122865 -0.727649" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/top_left_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="cam_dxl_1">
+  <inertial>
+    <origin xyz="-0.04266345230309464 -3.3401122651308124e-05 0.025849557394803324" rpy="0 0 0"/>
+    <mass value="0.07050498414159351"/>
+    <inertia ixx="2.5e-05" iyy="3.3e-05" izz="2.2e-05" ixy="-0.0" iyz="0.0" ixz="4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.136776 -0.110572 -0.720755" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/cam_dxl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.136776 -0.110572 -0.720755" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/cam_dxl_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="cam_arm_1">
+  <inertial>
+    <origin xyz="0.028529077801785402 0.01885733110909807 0.3803187175929603" rpy="0 0 0"/>
+    <mass value="0.16352229320965447"/>
+    <inertia ixx="0.002241" iyy="0.00219" izz="0.000176" ixy="-0.0" iyz="1e-06" ixz="-0.000211"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.091309 -0.08979 -0.763131" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/cam_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.091309 -0.08979 -0.763131" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/cam_arm_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="re_and_thermal_1">
+  <inertial>
+    <origin xyz="-0.003178633669971842 -0.011369787077590635 0.0573434301829564" rpy="0 0 0"/>
+    <mass value="0.04950122906418615"/>
+    <inertia ixx="6.7e-05" iyy="2.8e-05" izz="4.8e-05" ixy="0.0" iyz="2e-06" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.635567 -0.120884 -0.697926" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/re_and_thermal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.635567 -0.120884 -0.697926" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://Hitro_description/meshes/re_and_thermal_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="br_flipper" type="continuous">
+  <origin xyz="-0.098623 -0.136529 0.03399" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="br_flipper_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="fr_flipper" type="continuous">
+  <origin xyz="0.103377 -0.136529 0.034058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="fr_flipper_1"/>
+  <axis xyz="-0.0 -1.0 -0.0"/>
+</joint>
+
+<joint name="bl_flipper" type="continuous">
+  <origin xyz="-0.098623 0.137471 0.03399" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="bl_flipper_1"/>
+  <axis xyz="-0.0 -1.0 -0.0"/>
+</joint>
+
+<joint name="fl_flipper" type="continuous">
+  <origin xyz="0.103377 0.137471 0.034058" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="fl_flipper_1"/>
+  <axis xyz="-0.0 -1.0 -0.0"/>
+</joint>
+
+<joint name="body_base" type="fixed">
+  <origin xyz="0.19232 0.096071 0.206587" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="arm_base_1"/>
+</joint>
+
+<joint name="square2base" type="continuous">
+  <origin xyz="-0.093177 -0.056196 0.005831" rpy="0 0 0"/>
+  <parent link="arm_base_1"/>
+  <child link="base_1"/>
+  <axis xyz="-0.001817 -5e-06 0.999998"/>
+</joint>
+
+<joint name="base21link" type="continuous">
+  <origin xyz="-0.000625 0.0299 0.153999" rpy="0 0 0"/>
+  <parent link="base_1"/>
+  <child link="1link_1"/>
+  <axis xyz="0.005194 0.999987 1.5e-05"/>
+</joint>
+
+<joint name="1link22link" type="continuous">
+  <origin xyz="-0.001407 -0.002998 0.33423" rpy="0 0 0"/>
+  <parent link="1link_1"/>
+  <child link="2link_1"/>
+  <axis xyz="-0.005194 -0.999987 -1.5e-05"/>
+</joint>
+
+<joint name="2link2hand" type="continuous">
+  <origin xyz="0.416359 0.015838 0.001386" rpy="0 0 0"/>
+  <parent link="2link_1"/>
+  <child link="2link2hand_1"/>
+  <axis xyz="0.005194 0.999987 1.5e-05"/>
+</joint>
+
+<joint name="handyaw" type="continuous">
+  <origin xyz="0.067278 0.02415 0.021313" rpy="0 0 0"/>
+  <parent link="2link2hand_1"/>
+  <child link="hand_yaw_1"/>
+  <axis xyz="0.004657 -9e-06 -0.999989"/>
+</joint>
+
+<joint name="handroll" type="continuous">
+  <origin xyz="0.027839 0.000206 -0.018815" rpy="0 0 0"/>
+  <parent link="hand_yaw_1"/>
+  <child link="hand_roll_1"/>
+  <axis xyz="-0.999982 -0.003677 -0.004657"/>
+</joint>
+
+<joint name="top_right" type="continuous">
+  <origin xyz="0.058934 -0.012106 0.02403" rpy="0 0 0"/>
+  <parent link="hand_roll_1"/>
+  <child link="top_right_1"/>
+  <axis xyz="0.004885 -0.06463 -0.997897"/>
+</joint>
+
+<joint name="top_left" type="continuous">
+  <origin xyz="0.058835 0.015894 0.023118" rpy="0 0 0"/>
+  <parent link="hand_roll_1"/>
+  <child link="top_left_1"/>
+  <axis xyz="0.004885 -0.06463 -0.997897"/>
+</joint>
+
+<joint name="cam_dxl" type="fixed">
+  <origin xyz="0.039665 0.043795 0.020108" rpy="0 0 0"/>
+  <parent link="2link_1"/>
+  <child link="cam_dxl_1"/>
+</joint>
+
+<joint name="cam_angle" type="continuous">
+  <origin xyz="-0.045467 -0.020782 0.042376" rpy="0 0 0"/>
+  <parent link="cam_dxl_1"/>
+  <child link="cam_arm_1"/>
+  <axis xyz="0.004819 0.999988 1.4e-05"/>
+</joint>
+
+<joint name="re_and_th" type="fixed">
+  <origin xyz="0.02698 0.013913 -0.006605" rpy="0 0 0"/>
+  <parent link="hand_roll_1"/>
+  <child link="re_and_thermal_1"/>
+</joint>
+
+</robot>
