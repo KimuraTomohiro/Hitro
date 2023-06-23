@@ -162,11 +162,7 @@ void loop()
   nh.spinOnce();
  // if(!updating){MotorUpdate();}
   MotorUpdate();
-  if(n>10){
  FlipUpdate();
-    n=0;
-  }
-  n++;
    delay(100);
    //MotorOff();
 }
