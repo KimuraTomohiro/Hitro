@@ -1,0 +1,24 @@
+<launch>
+    <node name="joy_ps5" pkg="joy" type="joy_node" output="screen"> </node>
+    <node name="ps5joydriver" pkg="ps5controller" type="ps5controller_node" output="screen"> </node>
+    <!-- <node name="ps5toTwist" pkg="Hitro_move" type="ps5toTwist_hp" output="screen"> </node> -->
+    <node name="ps5toTwist" pkg="Hitro_move" type="ps5toTwist" output="screen"> </node>
+
+    <!-- <arg name="model" default="$(find 2nd_kmarm_description)/urdf/2nd_kmarm.xacro"/> -->
+    <arg name="model" default="$(find Hitro_description)/urdf/Hitro.xacro"/>
+    <arg name="gui" default="true" />
+    <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
+    <arg name="port" default="/dev/ttyUSB0"/> 
+    
+    <!-- <node name="km_arm1" pkg="Hitro_move" type="km_arm1"/> -->
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+    <param name="use_gui" value="$(arg gui)"/>
+    <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node> -->
+
+    <node name="Hitro_arm" pkg="Hitro_move" type="Hitro_arm" output="screen"> 
+        <rosparam command="load" file="$(find Hitro_move)/config/Hitro_arm.yaml"/>
+    </node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+    
+</launch>

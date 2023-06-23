@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <group ns="middle_camera">
+    <node pkg="uvc_camera" name="camera0" type="uvc_camera_node" output="screen">
+        <param name="device" type="string" value="/dev/video2"/>
+        <!-- <param name="device" type="string" value="/dev/video3"/> -->
+        <param name="width" type="int" value="640"/>
+        <param name="height" type="int" value="480"/>
+        <param name="fps" type="int" value="30"/>
+        <param name="format" value="yuyv"/>
+        <param name="frame_id" value="camera"/>
+    </node>
+  </group>
+  <group ns="rear_camera">
+    <node pkg="uvc_camera" name="camera0" type="uvc_camera_node" output="screen">
+        <param name="device" type="string" value="/dev/video4"/>
+        <!-- <param name="device" type="string" value="/dev/video3"/> -->
+        <param name="width" type="int" value="640"/>
+        <param name="height" type="int" value="480"/>
+        <param name="fps" type="int" value="30"/>
+        <param name="format" value="yuyv"/>
+        <param name="frame_id" value="camera"/>
+    </node>
+  </group>
+</launch>

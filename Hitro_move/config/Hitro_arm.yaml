@@ -1,0 +1,156 @@
+member_list:
+  - dxl_name: square2base
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 201
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: 2link2hand
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 203
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: handroll
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 204
+    baud_rate: 4500000
+    model_number: 1030
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0.0214757
+  - dxl_name: handyaw
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 205
+    baud_rate: 4500000
+    model_number: 1020
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: top_left
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 207
+    baud_rate: 4500000
+    model_number: 1020
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: base2link_l
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 198
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: base2link_r
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 199
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - dxl_name: 1link22link
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 202
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+  - port_name: "/dev/ttyUSB0"
+    dxl_name: th_camera
+    baud_rate: 4500000
+    dxl_id: 206
+    model_number: 1020
+    mode: "position"
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
+# member_list:
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: square2base
+#     baud_rate: 4500000
+#     dxl_id: 201
+#     model_number: 1120
+#     mode: "position"
+#     initial_pos: 0
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: 2link2hand
+#     baud_rate: 4500000
+#     dxl_id: 203
+#     model_number: 1120
+#     mode: "position"
+#     initial_pos: 0
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: handroll
+#     baud_rate: 4500000
+#     dxl_id: 204
+#     model_number: 1030
+#     mode: "position"
+#     initial_pos: 0
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: handyaw
+#     baud_rate: 4500000
+#     dxl_id: 205
+#     model_number: 1020
+#     mode: "position"
+#     initial_pos: 0
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: top_left
+#     baud_rate: 4500000
+#     dxl_id: 207
+#     model_number: 1020
+#     mode: "position"
+#     initial_pos: -1.607612
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: base2link_l
+#     baud_rate: 4500000
+#     dxl_id: 198
+#     model_number: 1120
+#     mode: "position"
+#     initial_pos: 0.098175
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: base2link_r
+#     baud_rate: 4500000
+#     dxl_id: 199
+#     model_number: 1120
+#     mode: "position"
+#     initial_pos: -0.205553
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: 1link22link
+#     baud_rate: 4500000
+#     dxl_id: 202
+#     model_number: 1120
+#     mode: "position"
+#     initial_pos: 0
+#   - port_name: "/dev/ttyUSB0"
+#     dxl_name: th_camera
+#     baud_rate: 4500000
+#     dxl_id: 206
+#     model_number: 1020
+#     mode: "position"
+#     initial_pos: 0

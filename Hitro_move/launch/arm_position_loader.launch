@@ -1,0 +1,5 @@
+<launch>
+    <node name="dxl" pkg="Hitro_move" type="arm_position_loader" output="screen"> 
+        <rosparam command="load" file="$(find Hitro_move)/config/urdf2dxl_motor.yaml"/>
+    </node>
+</launch>
