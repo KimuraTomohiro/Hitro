@@ -1,0 +1,17 @@
+member_list:
+  - dxl_name: fl1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 3
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 800
+    initial_pos: -1.420466
+  - dxl_name: fl2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 28
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 400
+    initial_pos: 3.012738

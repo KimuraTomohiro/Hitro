@@ -1,0 +1,123 @@
+member_list:
+  - dxl_name: fl1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 14
+    baud_rate: 4500000
+    model_number: 1170
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.967942
+  - dxl_name: fl2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 1
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.951068
+  - dxl_name: fl3
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 20
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 0.67
+  - dxl_name: fr1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 16
+    baud_rate: 4500000
+    model_number: 1170
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -1.51097
+  - dxl_name: fr2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 2
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 1.35451
+  - dxl_name: fr3
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 4
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -3.77
+  - dxl_name: bl1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 13
+    baud_rate: 4500000
+    model_number: 1170
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 2.86548
+  - dxl_name: bl2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 3
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 0.440253
+  - dxl_name: bl3
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 9
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 4.51
+  - dxl_name: br1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 15
+    baud_rate: 4500000
+    model_number: 1170
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -1.85305
+  - dxl_name: br2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 5
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -1.40359
+  - dxl_name: br3
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 10
+    baud_rate: 4500000
+    model_number: 1120
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -3.12
+
+

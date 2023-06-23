@@ -1,0 +1,9 @@
+<launch>
+   <node name="arm" pkg="Hitro_move" type="arm_dxl" output="screen"> 
+        <rosparam command="load" file="$(find Hitro_move)/config/arm_kamuy2.yaml"/>
+    </node>
+    <arg name="port" default="/dev/ttyUSB0"/> 
+    <node name="kamuy_arm_gui" pkg="Hitro_move" type="kamuy_arm_gui" output="screen"> 
+         <rosparam command="load" file="$(find Hitro_move)/config/arm_kamuy2.yaml"/>
+    </node>
+</launch>

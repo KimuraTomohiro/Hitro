@@ -1,0 +1,91 @@
+member_list:
+  - dxl_name: base
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 201
+    baud_rate: 4500000
+    model_number: 1150
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -1.47569
+  - dxl_name: b21l_l
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 198
+    baud_rate: 4500000
+    model_number: 1180
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 0.0276117
+  - dxl_name: b21l_r
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 199
+    baud_rate: 4500000
+    model_number: 1180
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 0.0214757
+  - dxl_name: 1l22l
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 202
+    baud_rate: 4500000
+    model_number: 1140
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.0490874
+  - dxl_name: 2l2h
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 203
+    baud_rate: 4500000
+    model_number: 1150
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.0628932
+  - dxl_name: sentan1
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 204
+    baud_rate: 4500000
+    model_number: 1030
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: 0.0475534
+  - dxl_name: sentan2
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 205
+    baud_rate: 4500000
+    model_number: 1020
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.80534
+  - dxl_name: handr
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 206
+    baud_rate: 4500000
+    model_number: 1020
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.0153398
+  - dxl_name: handl
+    port_name: "/dev/ttyUSB0"
+    dxl_id: 207
+    baud_rate: 4500000
+    model_number: 1020
+    mode: "position"
+    p_gain: 1600
+    i_gain: 10
+    d_gain: 40
+    initial_pos: -0.0705631

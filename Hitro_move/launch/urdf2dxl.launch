@@ -1,0 +1,7 @@
+<launch>
+    <arg name="port" default="/dev/ttyUSB0"/> 
+    <node name="urdf2dxl_l" pkg="Hitro_move" type="urdf2dxl" output="screen"> 
+        <!-- <rosparam command="load" file="$(find dynamixel_controller)/config/urdf2dxl_motor.yaml"/> -->
+        <rosparam command="load" file="$(find Hitro_move)/config/2nd_kmarm.yaml"/>
+    </node>
+</launch>

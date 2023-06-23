@@ -1,0 +1,12 @@
+<launch>
+    <arg name="port" default="/dev/ttyUSB0"/> 
+    <node name="dxl" pkg="Hitro_move" type="arm_dxl" output="screen"> 
+        <param name="serial_port" value="$(arg port)" />
+        <!-- <rosparam command="load" file="$(find Hitro_move)/config/robot_dog_small.yaml"/> -->
+        <!-- <rosparam command="load" file="$(find Hitro_move)/config/robot_dog_test.yaml"/> -->
+        <!-- <rosparam command="load" file="$(find Hitro_move)/config/urdf2dxl_motor.yaml"/> -->
+        <!-- <rosparam command="load" file="$(find Hitro_move)/config/2nd_kmarm.yaml"/> -->
+        <!-- <rosparam command="load" file="$(find Hitro_move)/config/4th_kmarm.yaml"/> -->
+        <rosparam command="load" file="$(find Hitro_move)/config/Hitro_arm.yaml"/>
+    </node>
+</launch>

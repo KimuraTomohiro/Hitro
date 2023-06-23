@@ -1,0 +1,11 @@
+member_list:
+  - port_name: "/dev/ttyUSB0"
+    dxl_name: square2base
+    baud_rate: 4500000
+    dxl_id: 202
+    model_number: 1140
+    mode: "position"
+    p_gain: 1600
+    i_gain: 5884
+    d_gain: 1
+    initial_pos: 0
