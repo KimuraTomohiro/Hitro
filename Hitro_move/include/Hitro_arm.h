@@ -27,8 +27,8 @@ class Hitro_arm
 {
 public:
   Hitro_arm(int motor_number){
-        sub_ps5= nh.subscribe("/cmd_vel", 1,&Hitro_arm::joy2xyz,this);
-        sub_button=nh.subscribe("/cmd_button", 1,&Hitro_arm::msg_button,this);
+        sub_ps5= nh.subscribe("/arm_cmd_vel", 1,&Hitro_arm::joy2xyz,this);
+        sub_button=nh.subscribe("/arm_cmd_button", 1,&Hitro_arm::msg_button,this);
         // sub_ps5= nh.subscribe("/cmd_vel", 1,&Hitro_arm::urdf_check,this);
         
     // if(!urdf_on){
