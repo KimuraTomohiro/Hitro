@@ -5,5 +5,5 @@
     </node>
     <!--joyをps5のメッセージに変換する-->
     <node name="ps5controller" pkg="ps5controller" type="ps5controller_node" output="screen"/>
-    <node name="hitro_joy_to_arduino" pkg="hitro_joy_to_arduino" type="hitro_joy_to_arduino"/>
+    <node name="hitro_joy" pkg="hitro_joy_to_arduino" type="hitro_joy"/>
 </launch>
