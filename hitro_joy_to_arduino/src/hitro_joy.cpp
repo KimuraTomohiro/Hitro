@@ -8,6 +8,7 @@ ros::Publisher pub_twist ;
 ros::Publisher pub_button;
 ros::Publisher pub_ard;
 int CONTROL_MODE=0;//0:FLIPPER_MODE,1:ARM_MODE
+bool R3_PUSHING=false;
 std_msgs::Float32MultiArray pos; // arduinoに送るメッセージ
 
 void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
@@ -117,6 +118,18 @@ pub_button.publish(button_array);
 }
 
 void ps5toTwist(const ps5controller::PS5ControllerConstPtr& ps5_msg){
+   
+   if(ps5_msg->R3==true){
+        R3_PUSHING=true;
+   }
+   else{
+    if(R3_PUSHING){
+        if(CONTROL_MODE==0){CONTROL_MODE=1;}
+        else{CONTROL_MODE=0;}
+        R3_PUSHING=false;
+    }
+   }
+   
     switch(CONTROL_MODE){
         case 0://FLIPPER_MODE
             pub_Flipper(ps5_msg);
