@@ -1,14 +1,17 @@
 #include <bits/stdc++.h>
 #include <ros/ros.h>
 #include <std_msgs/Float32MultiArray.h>
+#include <std_msgs/Bool.h>
 #include "ps5controller/PS5Controller.h"
 #include <geometry_msgs/Twist.h>
 
 ros::Publisher pub_twist ;
 ros::Publisher pub_button;
 ros::Publisher pub_ard;
+ros::Publisher pub_flip_cari;
 int CONTROL_MODE=0;//0:FLIPPER_MODE,1:ARM_MODE
 bool R3_PUSHING=false;
+bool CARI_PUSHING=false;
 std_msgs::Float32MultiArray pos; // arduinoに送るメッセージ
 
 void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
@@ -68,6 +71,18 @@ void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
         if(xor_pos){
 */
             pub_ard.publish(pos);
+
+            std_msgs::Bool cari;
+            if(msg->Circle){ CARI_PUSHING=true;}
+            else{
+                if(CARI_PUSHING){
+                    cari.data=true;
+                    pub_flip_cari.publish(cari);
+                    CARI_PUSHING=false;}
+                else{
+
+                    }
+                }
   //      }
         }
 
@@ -149,12 +164,13 @@ int main(int argc, char** argv){
     ros::init(argc, argv, "hitro_joy_to_arduino");
     ros::NodeHandle nh("~");
     pub_ard= nh.advertise<std_msgs::Float32MultiArray>("/hitro_joy_to_arduino", 1);
+    pub_flip_cari= nh.advertise<std_msgs::Bool>("/flipper_cari", 1);
     pub_twist = nh.advertise<geometry_msgs::Twist>("/arm_cmd_vel", 1);
     pub_button = nh.advertise<std_msgs::Float32MultiArray>("/arm_cmd_button", 1);
 
     ros::Subscriber sub_ps5 = nh.subscribe("/ps5controller", 1, ps5toTwist);
    // ros::Subscriber ps5_msg_sub = nh.subscribe<ps5controller::PS5Controller>("/ps5controller", 1, ps5msgCb);
-    ros::Rate loop_rate(120);
+    ros::Rate loop_rate(20);
 
     ros::spin();
 }
