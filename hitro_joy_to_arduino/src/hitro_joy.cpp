@@ -4,19 +4,24 @@
 #include <std_msgs/Bool.h>
 #include "ps5controller/PS5Controller.h"
 #include <geometry_msgs/Twist.h>
+#include <flipper_msgs/Flipper.h>
 
-ros::Publisher pub_twist ;
-ros::Publisher pub_button;
-ros::Publisher pub_ard;
-ros::Publisher pub_flip_cari;
+ros::Publisher pub_arm_twist ;
+ros::Publisher pub_arm_button;
+ros::Publisher pub_twist,pub_flipper;
+flipper_msgs::Flipper flipper_target;
+
 int CONTROL_MODE=0;//0:FLIPPER_MODE,1:ARM_MODE
 bool R3_PUSHING=false;
 bool CARI_PUSHING=false;
 std_msgs::Float32MultiArray pos; // arduinoに送るメッセージ
+const float max_vel=0.4;
+const float max_angular=0.4;
 
-void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
-        pos.data.resize(6);
-        // クローラの制御
+void pub_crawler(const ps5controller::PS5ControllerConstPtr& msg){
+      geometry_msgs::Twist target;
+
+            // クローラの制御
         float LStickUp = msg->LStickUp;
         float LStickLeft = msg->LStickLeft;
         //コントローラのノイズ対策	
@@ -24,40 +29,29 @@ void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
 		if( -spd_thresh <= LStickLeft && LStickLeft <= spd_thresh) LStickLeft = 0;
 		if( -spd_thresh <= LStickUp && LStickUp <= spd_thresh) LStickUp = 0;
 
-		float posR = LStickUp + LStickLeft;
-		float posL = LStickUp - LStickLeft;
+        target.linear.x=max_vel*LStickUp;
+        target.angular.z=max_angular*LStickLeft;
 
-		const int MAX = 1;
-        if(std::abs(posR) > MAX  ||  std::abs(posL) > MAX){  // 絶対値が1超えてるなら　大きい方を1に,　小さい方は比率を変えないように小さくする
-            float large = std::max( std::abs(posR), std::abs(posL));
-            posR = posR / large * MAX;
-            posL = posL / large * MAX;
-			//std::cout << " std::abs(pos0row): " << std::abs(pos0row) <<  "   std::abs(pos1row):  " << std::abs(pos1row) << "  large: " << large << "  MAX : " << MAX  << std::endl;
-        }
-		//std::cout << " joy_axes[0]: " << joy_axes[0] << " joy_axes[1]: " << joy_axes[1] << "  pos0row: " << pos0row << "   pos1row: "  <<  pos1row << std::endl;
-		//pos[0].data = -1 * speed * pos0row * abs(pos0row);
-		//pos[1].data = -1 * speed * pos1row * abs(pos1row);
-        //	pos[0].data = 1 * speed * pos0row;
+        pub_twist.publish(target);
 
-        if(posL>0.6){pos.data[1]=-1;}
-        else if(posL>0.2){pos.data[1]=-0.5;}
-        else if(posL <-0.6){pos.data[1] = 1;}
-        else if(posL <-0.2){pos.data[1]=0.5;}
-        else{pos.data[1]=0;}
+}
 
-        if(posR>0.6){pos.data[0]=1;}
-        else if(posR>0.2){pos.data[0]=0.5;}
-        else if(posR <-0.6){pos.data[0] = -1;}
-        else if(posR <-0.2){pos.data[0]=-0.5;}
-        else{pos.data[0]=0;}
+void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
+        if(msg->Circle){ CARI_PUSHING=true;}
+        else{
+            if(CARI_PUSHING){
+                flipper_target.CARIBLATE=true;
+                  //  pub_flip_cari.publish(cari);
+                    CARI_PUSHING=false;}
+                else{
+                    flipper_target.CARIBLATE=false;
+                    }
+                }
 
-        
-        // サブクローラの制御
-        pos.data[3] = msg->L1 - msg->L2Button;
-        pos.data[2] = -(msg->R1 - msg->R2Button);
-        pos.data[5] = -msg->CrossUp;
-        pos.data[4] = msg->Triangle - msg->Cross;
-
+        flipper_target.velocity.at(0)=-(msg->R1 - msg->R2Button);
+        flipper_target.velocity.at(1)=msg->L1 - msg->L2Button;
+        flipper_target.velocity.at(2)=msg->Triangle - msg->Cross;
+        flipper_target.velocity.at(3)=-msg->CrossUp;
 /*
     bool xor_pos=false;
         for(int i=0;i<6;i++){
@@ -70,25 +64,13 @@ void pub_Flipper(const ps5controller::PS5ControllerConstPtr& msg){
         }
         if(xor_pos){
 */
-            pub_ard.publish(pos);
-
-            std_msgs::Bool cari;
-            if(msg->Circle){ CARI_PUSHING=true;}
-            else{
-                if(CARI_PUSHING){
-                    cari.data=true;
-                    pub_flip_cari.publish(cari);
-                    CARI_PUSHING=false;}
-                else{
-
-                    }
-                }
+            pub_flipper.publish(flipper_target);
   //      }
         }
 
 void pub_arm(const ps5controller::PS5ControllerConstPtr& ps5_msg){
-            double max_speed=0.5;//[m/s]
-        double max_angle_speed=1;//[rad/s]
+double max_speed=0.5;//[m/s]
+double max_angle_speed=1;//[rad/s]
 double max_up = 0.1/2;//足をどれだけまで上げれるか[m]
 //double max_curvature=6.9686;//[1/m]
 double X=ps5_msg->LStickUp;
@@ -126,8 +108,8 @@ button_array.data[10]=ps5_msg->R3;
 button_array.data[11]=ps5_msg->PSButton;
 button_array.data[12]=ps5_msg->Circle;
 
-pub_twist.publish(target);
-pub_button.publish(button_array);
+pub_arm_twist.publish(target);
+pub_arm_button.publish(button_array);
 
 
 }
@@ -156,6 +138,8 @@ void ps5toTwist(const ps5controller::PS5ControllerConstPtr& ps5_msg){
         default://not exist
         break;
     }
+   pub_crawler(ps5_msg);
+
 
 
 }
@@ -163,14 +147,16 @@ void ps5toTwist(const ps5controller::PS5ControllerConstPtr& ps5_msg){
 int main(int argc, char** argv){
     ros::init(argc, argv, "hitro_joy_to_arduino");
     ros::NodeHandle nh("~");
-    pub_ard= nh.advertise<std_msgs::Float32MultiArray>("/hitro_joy_to_arduino", 1);
-    pub_flip_cari= nh.advertise<std_msgs::Bool>("/flipper_cari", 1);
-    pub_twist = nh.advertise<geometry_msgs::Twist>("/arm_cmd_vel", 1);
-    pub_button = nh.advertise<std_msgs::Float32MultiArray>("/arm_cmd_button", 1);
+
+    flipper_target.velocity.resize(4);
+    pub_twist= nh.advertise<geometry_msgs::Twist>("/cmd_vel_joy", 1);
+    pub_flipper=nh.advertise<flipper_msgs::Flipper>("/flipper_target", 1);
+    pub_arm_twist = nh.advertise<geometry_msgs::Twist>("/arm_cmd_vel", 1);
+    pub_arm_button = nh.advertise<std_msgs::Float32MultiArray>("/arm_cmd_button", 1);
+
 
     ros::Subscriber sub_ps5 = nh.subscribe("/ps5controller", 1, ps5toTwist);
    // ros::Subscriber ps5_msg_sub = nh.subscribe<ps5controller::PS5Controller>("/ps5controller", 1, ps5msgCb);
     ros::Rate loop_rate(20);
-
     ros::spin();
 }
