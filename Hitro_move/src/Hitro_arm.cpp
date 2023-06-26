@@ -264,6 +264,8 @@ void Hitro_arm::hand_ud(float lin_z){
 void Hitro_arm::hand_roll(float roll){
   float past_roll=joint_angle[4];
   joint_angle[4]=past_roll+roll*joy_mass;
+  ch_angle4+=roll*joy_mass;
+  
 }
 
 void Hitro_arm::ee_dir(){//エンドエフェクタの方向算出、imaxはyaw、pitchでついているため、真横に行ったときにrollを調整する必要があるので、この関数に処理を記述
@@ -309,7 +311,7 @@ void Hitro_arm::ee_rotate(){//エンドエフェクタの現在方向と保存�
 }
 void Hitro_arm::vector_rotate_xy(float theta1,float theta2,float theta3){
   // std::cout<<theta1<<endl;
-  std::cout<<"1::"<<v43_now[0]<<"::2::"<<v43_now[1]<<"::3::"<<v43_now[2]<<endl;
+  // std::cout<<"1::"<<v43_now[0]<<"::2::"<<v43_now[1]<<"::3::"<<v43_now[2]<<endl;
   float theta1_=theta1+1.57f;
   if(theta1<0.01f&&theta1>-0.01f){
     theta1_=theta1;
@@ -323,23 +325,23 @@ void Hitro_arm::vector_rotate_xy(float theta1,float theta2,float theta3){
   float vxy=v43_now[0]*cos(theta2_)+v43_now[2]*sin(theta2_);
   float vyy=v43_now[1];
   float vzy=-1.0f*v43_now[0]*sin(theta2_)+v43_now[2]*cos(theta2_);
-  std::cout<<"cos::"<<cos(theta2_)<<endl;
-  std::cout<<"sin::"<<sin(theta2_)<<endl;
-  std::cout<<"11::"<<vxy<<"::22::"<<vyy<<"::33::"<<vzy<<endl;
+  // std::cout<<"cos::"<<cos(theta2_)<<endl;
+  // std::cout<<"sin::"<<sin(theta2_)<<endl;
+  // std::cout<<"11::"<<vxy<<"::22::"<<vyy<<"::33::"<<vzy<<endl;
   float vxz=vxy*cos(theta3_)-vyy*sin(theta3_);
   float vyz=vxy*sin(theta3_)+vyy*cos(theta3_);
   float vzz=vzy;
-  std::cout<<"111::"<<vxz<<"::222::"<<vyz<<"::333::"<<vzz<<endl;
+  // std::cout<<"111::"<<vxz<<"::222::"<<vyz<<"::333::"<<vzz<<endl;
   v43_now_rotate[0]=vxz/L34;
   v43_now_rotate[1]=(vyz*cos(theta1_)-vzz*sin(theta1_))/L34;
   v43_now_rotate[2]=(vyz*sin(theta1_)+vzz*cos(theta1_))/L34;
   // std::cout<<theta2_<<endl;
-  for(int i=0;i<3;i++){
-    std::cout<<i<<"::"<<v43_now_rotate[i]<<endl;
+  // for(int i=0;i<3;i++){
+  //   std::cout<<i<<"::"<<v43_now_rotate[i]<<endl;
     
-  }
-   std::cout<<sqrt(pow(v43_now_rotate[0],2)+pow(v43_now_rotate[1],2)+pow(v43_now_rotate[2],2))<<endl;
-  std::cout<<""<<endl;
+  // }
+  //  std::cout<<sqrt(pow(v43_now_rotate[0],2)+pow(v43_now_rotate[1],2)+pow(v43_now_rotate[2],2))<<endl;
+  // std::cout<<""<<endl;
 }
 
 void Hitro_arm::vector_rotate_xz(float theta1,float theta2,float theta3){
@@ -441,6 +443,9 @@ bool Hitro_arm::ik_check(int num){
 }
 
 void Hitro_arm::urdf2pub(){
+    if(start_reset_button){
+      calculate_tf();
+    }
     joint_rad_urdf.header.stamp=ros::Time::now();
     joint_rad_urdf.position[0]=joint_angle[0]+ch_angle0;
     joint_rad_urdf.position[1]=-1.0f*(joint_angle[1]-1.569f);
@@ -448,10 +453,13 @@ void Hitro_arm::urdf2pub(){
     // joint_rad_urdf.position[3]=joint_angle[3];
     joint_angle[3]=3.14f-(3.14f-std::abs(joint_angle[1]))-std::abs(joint_angle[2])+ch_angle3;
     joint_rad_urdf.position[3]=(3.14f-(3.14f-std::abs(joint_angle[1]))-std::abs(joint_angle[2])+ch_angle3);
+    // joint_rad_urdf.position[4]=joint_angle[4]-1.0f*theta4_diff;
     joint_rad_urdf.position[4]=joint_angle[4];
     if(!back_mode){
-      joint_rad_urdf.position[5]=-1.0f*(-1.0f*joint_angle[0]+ch_angle5);
+      // joint_rad_urdf.position[5]=-1.0f*(-1.0f*joint_angle[0]+ch_angle5);
+      joint_rad_urdf.position[5]=-1.0f*controll_theta5();
       joint_angle[5]=-1.0f*joint_angle[0]+ch_angle5;
+      
     }
     else{
       joint_rad_urdf.position[5]=ch_angle5;
@@ -558,6 +566,7 @@ void Hitro_arm::reset_position(){
   }
   std::cout<<""<<endl;
   ch_angle3=0.0f;
+  ch_angle4=0.0f;
   ch_angle5=0.0f;
   kinetics();
   ee_dir();
@@ -646,6 +655,59 @@ void Hitro_arm::controll_flipper(float value,int num){
   urdf2pub();
 }
 
+float Hitro_arm::controll_theta5(){
+  // float theta3=joint_angle[3];
+  float theta3=ch_angle3;
+  float theta4=-1.0f*joint_angle[0]+ch_angle5;
+  float l1=abs(L34*sin(theta3));
+  float l2=abs(L34*cos(theta3));
+  float l3=abs(l2*sin(theta4)/cos(theta4));
+  float l4=sqrt(pow(l2,2)+pow(l3,2));
+  float l5=sqrt(pow(l1,2)+pow(l4,2));
+  float res=acos((pow(L34,2)+pow(l5,2)-pow(l3,2))/(2*L34*l5))*theta4/abs(theta4);
+  if(!std::isfinite(res)){
+    res=0.0f;
+  }
+  // std::cout<<"th3::"<<theta3<<endl;
+  // std::cout<<"l1_::"<<l1<<endl;
+  // std::cout<<"l2_::"<<l2<<endl;
+  // std::cout<<"l3_::"<<l3<<endl;
+  // std::cout<<"l4_::"<<l4<<endl;
+  // std::cout<<"l5_::"<<l5<<endl;
+  // std::cout<<"th4::"<<theta4<<endl;
+  // std::cout<<"res::"<<res<<endl;
+  // std::cout<<""<<endl;
+  return res;
+}
+void Hitro_arm::calculate_tf(){
+  try
+  {
+    listener.waitForTransform(target_frame_id, source_frame_id, ros::Time(0), ros::Duration(3.0));
+    listener.lookupTransform(target_frame_id, source_frame_id, ros::Time(0), transform);
+    // ROS_INFO("Translation: (%f, %f, %f)", transform.getOrigin().x(), transform.getOrigin().y(), transform.getOrigin().z());
+    // ROS_INFO("Rotation: (%f, %f, %f, %f)", transform.getRotation().x(), transform.getRotation().y(), transform.getRotation().z(), transform.getRotation().w());
+    
+    double roll;
+    double pitch;
+    double yaw;
+    tf::Matrix3x3(transform.getRotation()).getRPY(roll, pitch, yaw); //tfのQuartanionをRPY角に変更
+    float past=theta4_diff;
+    theta4_diff=-1.0f*ch_angle4-roll;
+    if(theta4_diff<0.05f){
+      theta4_diff=past;
+    }
+   
+    
+    std::cout<<theta4_diff<<endl;
+    // ROS_INFO("rpy::%f,%f,%f",roll,pitch,yaw);
+    // ROS_INFO("th::%f,%f,%f",ch_angle4,transform.getRotation().x(),theta5_diff);
+  }
+  catch (tf::TransformException& ex)
+  {
+    ROS_ERROR("Failed to lookup transform: %s", ex.what());
+  }
+
+}
 void Hitro_arm::msg_button(const std_msgs::Float32MultiArray& msg){
     if(msg.data[0]>0){//L1ボタン//ハンド左回転
       if(start_reset_button){

@@ -244,3 +244,10 @@ target_link_libraries(Hitro_arm
 ${catkin_LIBRARIES}
 ${Boost_LIBRARIES}
 )
+
+add_executable(calculate_tf
+  src/calculate_tf.cpp 
+  )
+target_link_libraries(calculate_tf
+${catkin_LIBRARIES}
+)

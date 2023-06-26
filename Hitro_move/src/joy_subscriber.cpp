@@ -104,8 +104,8 @@ ros::NodeHandle nh;
 ros::NodeHandle pnh("~");
 
 ros::Subscriber sub_ps5 = nh.subscribe("/ps5controller", 1, ps5toTwist);
-pub_twist = nh.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
-pub_button = nh.advertise<std_msgs::Float32MultiArray>("/cmd_button", 1);
+pub_twist = nh.advertise<geometry_msgs::Twist>("/arm_cmd_vel", 1);
+pub_button = nh.advertise<std_msgs::Float32MultiArray>("/arm_cmd_button", 1);
 ros::Rate loop_rate(120);
 
 ros::spin();

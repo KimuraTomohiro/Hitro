@@ -21,7 +21,7 @@
 #include <iostream>
 #include <math.h>
 #include <arm_msgs/ArmCommand.h>
-
+#include <tf/transform_listener.h>
 namespace std{};
 class Hitro_arm
 {
@@ -85,6 +85,8 @@ public:
     void go_position(std::vector<float> position);//引数に指定したポジションにいく
     void controll_camera(float value);//camera_arm操作
     void controll_flipper(float value,int num);//フリッパ操作,valueで+-、numでフリッパ選択
+    float controll_theta5();//theta5の値を調整。投影面角度のみth0から求まる。
+    void calculate_tf();//構造上回っているように見えるのを、tfを用いて修正を行う
 private:
     ros::NodeHandle nh;
     ros::Publisher pub_dxl= nh.advertise<sensor_msgs::JointState>("/dxl_target_rad",1);//dxlにパブリッシュ;
@@ -134,10 +136,19 @@ private:
     float yaw_ee=0.0f;//y
     float add=0.001f;
     bool once_startposi=true;
-    float ch_angle3=0.0f;
-    float ch_angle5=0.0f;
+    float ch_angle3=0.0f;//2link2hand
+    float ch_angle5=0.0f;//hand_yaw
     float ch_angle0=0.0f;
+    float ch_angle4=0.0f;//hand_roll
     float cam_angle=0.0f;
+    //tf取得に必要
+    tf::TransformListener listener;
+    std::string target_frame_id = "base_link";//origin
+    std::string source_frame_id = "hand_roll_1";//target
+    tf::StampedTransform transform;
+    float theta3_diff=0.0f;
+    float theta4_diff=0.0f;
+    float theta5_diff=0.0f;
     //スイッチ
     bool upordown=false;//アームを上げる下げるか判別 上げるをtrue
     bool rotate_dir=false;//ハンド回転方向、右をtrue
