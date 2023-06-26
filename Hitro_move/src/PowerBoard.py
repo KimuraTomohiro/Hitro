@@ -9,6 +9,7 @@ def init():
     global ser
     try:
         ser = serial.Serial('/dev/ttyUSB0',115200,timeout=0.1)
+        #venderid: 0x0403 productid: 0x6001
     except:
         print("Connection Failed")
         quit()
